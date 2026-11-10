@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Método CLARO · Nenética</title>
+<meta name="description" content="Implantação de inteligência artificial para pequenas e médias empresas, começando pelo processo certo. Diagnóstico, redesenho, piloto medido e regras claras do que fica com a IA e do que fica com as pessoas.">
+<meta property="og:title" content="Método CLARO · Nenética">
+<meta property="og:description" content="IA na sua empresa, começando pelo processo certo. Diagnóstico, redesenho e piloto medido.">
+<meta property="og:type" content="website">
+<link rel="icon" href="icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --coral:#F26A48; --coral-2:#FD986E; --coral-deep:#B83A22;
+  --grafite:#272D33; --slate:#1C2129; --tinta:#14181D;
+  --papel:#FCFAF9; --pessego:#FBEDE7; --linha:#E8DFDA;
+  --texto:#272D33; --texto-2:#5A626B; --claro:#F4EFEC; --claro-2:#B7BEC6;
+  --raio:18px; --sombra:0 20px 50px -24px rgba(20,24,29,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--papel);color:var(--texto);font:400 17px/1.65 Inter,"Avenir Next",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.marca{font-family:Poppins,"Avenir Next",system-ui,sans-serif;line-height:1.15;letter-spacing:-.015em}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+.olho{display:inline-block;font:600 12.5px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:16px}
+.escuro .olho{color:var(--coral-2)}
+section{padding:96px 0}
+h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--texto-2);max-width:62ch;margin-top:18px}
+.escuro{background:var(--grafite);color:var(--claro)}
+.escuro .lead{color:var(--claro-2)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font:600 16px/1 Inter,sans-serif;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn-p{background:linear-gradient(135deg,var(--coral),#E9573F);color:#fff;box-shadow:0 14px 30px -12px rgba(242,106,72,.7)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(242,106,72,.8)}
+.btn-s{border:1.5px solid rgba(255,255,255,.28);color:#fff}
+.btn-s:hover{background:rgba(255,255,255,.08)}
+:focus-visible{outline:3px solid var(--coral-2);outline-offset:3px;border-radius:6px}
+
+/* topo */
+.topo{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s ease,box-shadow .3s ease}
+.topo.solida{background:rgba(39,45,51,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.marca{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:600;font-size:18px}
+.marca img{width:34px;height:auto}
+.topo nav{display:flex;gap:28px;align-items:center}
+.topo nav a{color:var(--claro-2);text-decoration:none;font-size:15px;font-weight:500}
+.topo nav a:hover,.topo nav a.btn{color:#fff}
+[hidden]{display:none!important}
+.topo .btn{padding:11px 18px;font-size:14.5px}
+
+/* hero */
+.hero{position:relative;background:radial-gradient(1100px 600px at 85% 10%,rgba(242,106,72,.22),transparent 60%),radial-gradient(800px 500px at 0% 100%,rgba(253,152,110,.10),transparent 60%),var(--tinta);color:#fff;padding:150px 0 110px;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,5.6vw,66px);font-weight:700;max-width:16ch}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--coral),var(--coral-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:#C9CFD6;margin-top:24px}
+.acoes{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.selos{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:40px;color:var(--claro-2);font-size:14.5px}
+.selos span{display:flex;align-items:center;gap:8px}
+.selos span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.orbita{position:relative;aspect-ratio:1;max-width:400px;justify-self:center;width:100%}
+.orbita .anel{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
+.orbita .anel.a2{inset:14%;border-color:rgba(242,106,72,.28)}
+.orbita .anel.a3{inset:28%;border-color:rgba(255,255,255,.08)}
+.orbita .logo{position:absolute;inset:34%;display:grid;place-items:center;animation:flutua 6s ease-in-out infinite}
+.orbita .logo img{filter:drop-shadow(0 18px 30px rgba(242,106,72,.45))}
+.orbita .letra{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font:700 19px/1 Poppins,sans-serif;color:#fff;background:rgba(39,45,51,.9);border:1px solid rgba(253,152,110,.5);box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.giro{position:absolute;inset:0;animation:gira 60s linear infinite}
+.giro .letra{animation:contra 60s linear infinite}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes gira{to{transform:rotate(360deg)}}
+@keyframes contra{to{transform:rotate(-360deg)}}
+
+/* problema */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+.card{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:30px;box-shadow:var(--sombra)}
+.card .num{font:700 14px/1 Poppins,sans-serif;color:var(--coral-deep);letter-spacing:.08em}
+.card h3{font-size:21px;margin:14px 0 10px}
+.card p{color:var(--texto-2);font-size:16px}
+.frase{margin-top:56px;padding:34px 38px;border-radius:var(--raio);background:var(--pessego);border-left:6px solid var(--coral);font:600 clamp(19px,2.2vw,24px)/1.45 Poppins,sans-serif;max-width:860px}
+
+/* método */
+.claro-grid{display:grid;grid-template-columns:320px 1fr;gap:40px;margin-top:56px;align-items:start}
+.abas{display:flex;flex-direction:column;gap:10px}
+.aba{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;color:var(--claro-2);font:500 16px/1.3 Inter,sans-serif;transition:all .2s ease}
+.aba b{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font:700 19px/1 Poppins,sans-serif;background:rgba(255,255,255,.06);color:#fff}
+.aba:hover{border-color:rgba(253,152,110,.5);color:#fff}
+.aba[aria-selected=true]{background:rgba(242,106,72,.12);border-color:var(--coral);color:#fff}
+.aba[aria-selected=true] b{background:linear-gradient(135deg,var(--coral),#E9573F)}
+.painel{background:var(--slate);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:40px;min-height:100%}
+.painel[hidden]{display:none}
+.painel .fase{font:600 13px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-2)}
+.painel h3{font-size:clamp(24px,2.6vw,30px);margin:12px 0 14px;color:#fff}
+.painel p{color:#C9CFD6}
+.painel .pergunta{margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.16);color:#fff;font-style:italic}
+.painel ul{list-style:none;margin-top:22px;display:grid;gap:10px}
+.painel li{display:flex;gap:12px;color:#E4E8EC}
+.painel li::before{content:"";flex:none;width:18px;height:18px;margin-top:4px;border-radius:50%;background:radial-gradient(circle,var(--coral) 35%,transparent 40%),rgba(242,106,72,.18)}
+.painel .tempo{margin-top:24px;font-size:14.5px;color:var(--claro-2)}
+
+/* entregas */
+.entregas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.ent{padding:28px;border-radius:var(--raio);background:#fff;border:1px solid var(--linha);transition:transform .25s ease,box-shadow .25s ease}
+.ent:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+.ent svg{width:40px;height:40px;color:var(--coral)}
+.ent h3{font-size:19px;margin:16px 0 8px}
+.ent p{color:var(--texto-2);font-size:15.5px}
+
+/* escada */
+.escada{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px;align-items:end}
+.degrau{border-radius:16px;padding:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;justify-content:flex-end}
+.degrau:nth-child(1){min-height:200px}.degrau:nth-child(2){min-height:240px}.degrau:nth-child(3){min-height:280px}.degrau:nth-child(4){min-height:320px;background:rgba(242,106,72,.1);border-color:rgba(242,106,72,.45)}
+.degrau .g{font:700 42px/1 Poppins,sans-serif;color:var(--coral-2)}
+.degrau h3{font-size:19px;color:#fff;margin:10px 0 8px}
+.degrau p{font-size:15px;color:#C9CFD6}
+.regra{margin-top:28px;display:flex;gap:16px;align-items:flex-start;padding:22px 26px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#E4E8EC;max-width:900px}
+.regra strong{color:#fff}
+.regra svg{flex:none;width:26px;height:26px;color:var(--coral-2);margin-top:2px}
+
+/* exemplo */
+.exemplo{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:52px}
+.ex-col{padding:34px;border-radius:22px;border:1px solid var(--linha);background:#fff}
+.ex-col.depois{background:linear-gradient(160deg,#fff 0%,var(--pessego) 100%);border-color:#F3C9B9}
+.ex-col h3{font-size:20px;margin-bottom:14px}
+.ex-col ol{padding-left:20px;display:grid;gap:10px;color:var(--texto-2)}
+.ex-col ol strong{color:var(--texto)}
+.nota{margin-top:18px;font-size:14px;color:var(--texto-2)}
+
+/* pacotes */
+.pacotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;align-items:stretch}
+.pac{position:relative;display:flex;flex-direction:column;padding:34px 30px;border-radius:22px;background:#fff;border:1px solid var(--linha)}
+.pac.dest{background:var(--grafite);color:var(--claro);border-color:var(--grafite);box-shadow:0 30px 60px -28px rgba(20,24,29,.6)}
+.pac .tag{position:absolute;top:-13px;left:30px;background:linear-gradient(135deg,var(--coral),#E9573F);color:#fff;font:600 12px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+.pac h3{font-size:23px}
+.pac .dur{margin-top:6px;font-weight:600;color:var(--coral-deep);font-size:15px}
+.pac.dest .dur{color:var(--coral-2)}
+.pac .para{margin-top:14px;color:var(--texto-2);font-size:15.5px}
+.pac.dest .para{color:var(--claro-2)}
+.pac ul{list-style:none;margin:22px 0 26px;display:grid;gap:11px;font-size:15.5px}
+.pac li{display:flex;gap:10px}
+.pac li::before{content:"";flex:none;width:16px;height:9px;margin-top:7px;border-left:2.5px solid var(--coral);border-bottom:2.5px solid var(--coral);transform:rotate(-45deg)}
+.pac .entrega{margin-top:auto;padding-top:18px;border-top:1px solid var(--linha);font-size:15px}
+.pac.dest .entrega{border-color:rgba(255,255,255,.12)}
+.pac .entrega b{display:block;font:600 12px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:8px}
+.pac.dest .entrega b{color:var(--coral-2)}
+.compromisso{margin-top:40px;display:flex;gap:22px;align-items:center;padding:30px 34px;border-radius:22px;background:var(--pessego);border:1px solid #F3C9B9}
+.compromisso .selo{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--coral);color:var(--coral-deep)}
+.compromisso .selo svg{width:36px;height:36px}
+.compromisso h3{font-size:21px;margin-bottom:6px}
+.compromisso p{color:var(--texto-2)}
+
+/* teste */
+.teste{display:grid;grid-template-columns:1fr 360px;gap:40px;margin-top:52px;align-items:start}
+.itens{display:grid;gap:12px}
+.item{padding:18px 20px;border-radius:14px;background:#fff;border:1px solid var(--linha)}
+.item .q{font-weight:600}
+.item .d{font-size:14.5px;color:var(--texto-2);margin-top:2px}
+.ops{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ops button{cursor:pointer;border:1.5px solid var(--linha);background:var(--papel);border-radius:999px;padding:8px 16px;font:500 14.5px/1 Inter,sans-serif;color:var(--texto);transition:all .15s ease}
+.ops button:hover{border-color:var(--coral)}
+.ops button[aria-pressed=true]{background:var(--grafite);border-color:var(--grafite);color:#fff}
+.result{position:sticky;top:96px;padding:32px;border-radius:22px;background:var(--grafite);color:var(--claro)}
+.result .pts{font:700 64px/1 Poppins,sans-serif;color:#fff}
+.result .pts small{font-size:22px;color:var(--claro-2);font-weight:500}
+.medidor{height:10px;border-radius:999px;background:rgba(255,255,255,.1);margin:18px 0 22px;overflow:hidden}
+.medidor i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--coral),var(--coral-2));border-radius:inherit;transition:width .4s ease}
+.result h3{font-size:20px;color:#fff;margin-bottom:8px}
+.result p{color:#C9CFD6;font-size:15.5px}
+.result .falta{margin-top:12px;font-size:14px;color:var(--claro-2)}
+.result .btn{margin-top:22px;width:100%;justify-content:center}
+
+/* para quem */
+.encaixe{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px}
+.enc{padding:34px;border-radius:22px;border:1px solid var(--linha);background:#fff}
+.enc h3{font-size:21px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.enc h3 span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px}
+.enc.sim h3 span{background:var(--pessego);color:var(--coral-deep)}
+.enc.nao h3 span{background:#EEF0F2;color:var(--texto-2)}
+.enc ul{list-style:none;display:grid;gap:12px;color:var(--texto-2)}
+.enc li{padding-left:22px;position:relative}
+.enc li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--coral)}
+.enc.nao li::before{background:#AEB4BB}
+
+/* dados */
+.dados{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.dado{padding:24px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.dado h3{font-size:17px;color:#fff;margin-bottom:8px}
+.dado p{font-size:15px;color:#C9CFD6}
+
+/* faq */
+.faq{margin-top:44px;display:grid;gap:12px;max-width:880px}
+details{border:1px solid var(--linha);border-radius:16px;background:#fff;padding:0 26px;transition:box-shadow .2s ease}
+details[open]{box-shadow:var(--sombra)}
+summary{cursor:pointer;list-style:none;padding:22px 0;font:600 17.5px/1.4 Poppins,sans-serif;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 26px/1 Inter,sans-serif;color:var(--coral);transition:transform .2s ease}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 22px;color:var(--texto-2)}
+
+/* cta */
+.cta{text-align:center;background:radial-gradient(700px 400px at 50% 0%,rgba(242,106,72,.25),transparent 70%),var(--tinta);color:#fff}
+.cta h2{margin-inline:auto;max-width:20ch}
+.cta .lead{margin-inline:auto;color:#C9CFD6}
+.cta .acoes{justify-content:center}
+.cta .obs{margin-top:22px;color:var(--claro-2);font-size:15px}
+footer{background:var(--tinta);color:var(--claro-2);font-size:14px;padding:30px 0 40px;border-top:1px solid rgba(255,255,255,.06)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* revelar */
+.rev{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .hero .wrap,.claro-grid,.teste{grid-template-columns:1fr}
+  .orbita{max-width:300px;order:-1}
+  .cards3,.entregas,.pacotes{grid-template-columns:1fr}
+  .escada{grid-template-columns:1fr 1fr}
+  .degrau{min-height:0!important}
+  .dados{grid-template-columns:1fr 1fr}
+  .result{position:static}
+  .topo nav a:not(.btn){display:none}
+}
+@media (max-width:640px){
+  section{padding:72px 0}
+  .hero{padding:120px 0 80px}
+  .exemplo,.encaixe,.escada,.dados{grid-template-columns:1fr}
+  .painel{padding:28px}
+  .compromisso{flex-direction:column;align-items:flex-start}
+  .frase{padding:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .rev{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="icone.png" alt="" width="34" height="31">Nenética</a>
+    <nav aria-label="Seções">
+      <a href="#metodo">O método</a>
+      <a href="#pacotes">Pacotes</a>
+      <a href="#teste">Teste rápido</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a class="btn btn-p" href="#contato">Agendar conversa</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="olho">Nenética · Método CLARO</span>
+      <h1>IA na sua empresa, começando pelo <em>processo certo</em>.</h1>
+      <p class="lead">Muita empresa compra ferramenta de IA e não vê diferença no caixa nem no atendimento. A gente faz o caminho inverso: entende o que o seu cliente vive, arruma o processo com a sua equipe e só então coloca a IA para trabalhar, num piloto medido e com regras escritas.</p>
+      <div class="acoes">
+        <a class="btn btn-p" href="#contato">Agendar conversa de 30 minutos</a>
+        <a class="btn btn-s" href="#metodo">Ver como funciona</a>
+      </div>
+      <div class="selos">
+        <span>Para pequenas e médias empresas</span>
+        <span>Um processo por vez</span>
+        <span>Medição antes e depois</span>
+      </div>
+    </div>
+    <div class="orbita" aria-hidden="true">
+      <div class="anel"></div><div class="anel a2"></div><div class="anel a3"></div>
+      <div class="giro">
+        <span class="letra" style="left:50%;top:0%">C</span>
+        <span class="letra" style="left:97.6%;top:34.5%">L</span>
+        <span class="letra" style="left:79.4%;top:90.5%">A</span>
+        <span class="letra" style="left:20.6%;top:90.5%">R</span>
+        <span class="letra" style="left:2.4%;top:34.5%">O</span>
+      </div>
+      <div class="logo"><img src="icone.png" alt="" width="192" height="174"></div>
+    </div>
+  </div>
+</section>
+
+<section id="problema">
+  <div class="wrap">
+    <span class="olho rev">O problema</span>
+    <h2 class="rev">Comprar uma ferramenta não é implantar IA.</h2>
+    <p class="lead rev">Quando a IA entra antes do processo, ela costuma acelerar a bagunça que já existia. Três sinais aparecem quase sempre:</p>
+    <div class="cards3">
+      <article class="card rev">
+        <span class="num">01</span>
+        <h3>Ferramenta solta</h3>
+        <p>Cada pessoa usa a IA do seu jeito. Ajuda quem usa, mas o processo da empresa continua igual, com as mesmas travas e os mesmos retrabalhos.</p>
+      </article>
+      <article class="card rev">
+        <span class="num">02</span>
+        <h3>Ninguém é dono</h3>
+        <p>Não fica claro o que a máquina pode decidir sozinha, quem confere e o que fazer quando ela erra. O risco aparece justamente onde ninguém está olhando.</p>
+      </article>
+      <article class="card rev">
+        <span class="num">03</span>
+        <h3>Ninguém mede</h3>
+        <p>Sem um ponto de partida medido, ninguém sabe dizer se melhorou. A conversa vira impressão, e o investimento vira aposta.</p>
+      </article>
+    </div>
+    <p class="frase rev">A pergunta certa não é "qual IA usar?". É "onde o meu processo trava, e o que a IA pode assumir ali com segurança?".</p>
+  </div>
+</section>
+
+<section class="escuro" id="metodo">
+  <div class="wrap">
+    <span class="olho rev">O que é</span>
+    <h2 class="rev">Cinco fases, uma ordem que não se pula.</h2>
+    <p class="lead rev">O Método CLARO é a forma como conduzimos cada projeto. A ferramenta é a última escolha, nunca a primeira. Clique em cada fase.</p>
+
+    <div class="claro-grid">
+      <div class="abas" role="tablist" aria-label="Fases do Método CLARO">
+        <button class="aba" role="tab" id="t-c" aria-controls="p-c" aria-selected="true"><b>C</b>Cliente</button>
+        <button class="aba" role="tab" id="t-l" aria-controls="p-l" aria-selected="false" tabindex="-1"><b>L</b>Leitura interna</button>
+        <button class="aba" role="tab" id="t-a" aria-controls="p-a" aria-selected="false" tabindex="-1"><b>A</b>Arquitetura do processo</button>
+        <button class="aba" role="tab" id="t-r" aria-controls="p-r" aria-selected="false" tabindex="-1"><b>R</b>Responsabilidade</button>
+        <button class="aba" role="tab" id="t-o" aria-controls="p-o" aria-selected="false" tabindex="-1"><b>O</b>Operação</button>
+      </div>
+      <div>
+        <div class="painel" role="tabpanel" id="p-c" aria-labelledby="t-c">
+          <span class="fase">Fase C · Cliente</span>
+          <h3>Começamos por quem paga a conta.</h3>
+          <p>Entrevistamos clientes e equipe para entender o que a empresa promete e onde essa promessa falha na prática.</p>
+          <p class="pergunta">O que o seu cliente espera, e em que momento ele se frustra?</p>
+          <ul><li>Ficha da promessa da empresa</li><li>Mapa dos atritos na jornada do cliente</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-l" aria-labelledby="t-l" hidden>
+          <span class="fase">Fase L · Leitura interna</span>
+          <h3>Uma fotografia honesta de dentro.</h3>
+          <p>Testamos se a empresa está pronta para a mudança e medimos o ponto de partida com os dados que ela já tem. Se não houver dados, contamos à mão por alguns dias.</p>
+          <p class="pergunta">A empresa aguenta a mudança, e o que exatamente precisa mudar?</p>
+          <ul><li>Teste de prontidão</li><li>Linha de base e metas</li><li>O problema escrito em uma frase, com número e prazo</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-a" aria-labelledby="t-a" hidden>
+          <span class="fase">Fase A · Arquitetura do processo</span>
+          <h3>Desenhamos o trabalho com quem faz o trabalho.</h3>
+          <p>Numa oficina com a equipe, mapeamos o processo como ele acontece de verdade, achamos a etapa que segura todo o resto e redesenhamos esse trecho. Às vezes a solução nem é IA, e a gente diz isso.</p>
+          <p class="pergunta">Onde o trabalho trava, e qual é o desenho melhor?</p>
+          <ul><li>Mapa do processo atual</li><li>Trava identificada</li><li>Trecho redesenhado</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-r" aria-labelledby="t-r" hidden>
+          <span class="fase">Fase R · Responsabilidade</span>
+          <h3>Por escrito: o que é da IA e o que é das pessoas.</h3>
+          <p>Para cada etapa, definimos quanto a IA pode fazer sozinha, quem confere, o que ela nunca pode tocar e como desfazer um erro.</p>
+          <p class="pergunta">Em cada etapa, quem executa: a máquina ou alguém da equipe?</p>
+          <ul><li>Matriz de autonomia</li><li>Ficha de governança: rastro, limite, material proibido, como desfazer, porta humana e revisão</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-o" aria-labelledby="t-o" hidden>
+          <span class="fase">Fase O · Operação</span>
+          <h3>Piloto pequeno, medido, com decisão escrita.</h3>
+          <p>Configuramos as ferramentas em nome da sua empresa, treinamos a equipe e acompanhamos o piloto toda semana. No fim, comparamos com o ponto de partida e decidimos juntos: ampliar, ajustar ou parar.</p>
+          <p class="pergunta">Como testar, implantar, medir e manter funcionando?</p>
+          <ul><li>Plano de piloto com critério de decisão</li><li>Painel com quatro linhas: caixa, cliente, acerto e ritmo</li><li>Rotina de revisão que a própria equipe conduz</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="entregas">
+  <div class="wrap">
+    <span class="olho rev">O que você recebe</span>
+    <h2 class="rev">Nada de relatório de cem páginas na gaveta.</h2>
+    <p class="lead rev">Cada entrega é curta, escrita para ser usada pela sua equipe na semana seguinte.</p>
+    <div class="entregas">
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+        <h3>Relatório de uma página</h3>
+        <p>A recomendação em linguagem simples: implantar IA num processo definido, arrumar processo e dados antes, ou não investir agora.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8M18 8l-5 8"/></svg>
+        <h3>Mapa do processo</h3>
+        <p>Como o trabalho acontece hoje, onde ele trava e o trecho redesenhado, feito junto com quem executa.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4"/><path d="M4 20V4"/></svg>
+        <h3>Matriz de autonomia</h3>
+        <p>Etapa por etapa, até onde a IA pode ir sozinha e onde uma pessoa precisa conferir ou decidir.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Ficha de governança</h3>
+        <p>As regras de segurança do uso da IA: o que fica registrado, o que ela não toca, como desfazer e quando chamar alguém.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        <h3>Painel de quatro linhas</h3>
+        <p>Caixa, cliente, acerto e ritmo, medidos antes e depois. É o que mostra, com número, se valeu a pena.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+        <h3>Equipe treinada</h3>
+        <p>Treinamento de quem vai usar e uma rotina de revisão que a própria equipe consegue conduzir depois que saímos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="escuro" id="seguranca">
+  <div class="wrap">
+    <span class="olho rev">O diferencial</span>
+    <h2 class="rev">A IA sobe de degrau só quando provou que pode.</h2>
+    <p class="lead rev">Em vez de "ligar a IA e torcer", cada etapa do processo recebe um degrau de autonomia. Ela começa embaixo e só sobe com números do piloto na mão.</p>
+    <div class="escada">
+      <div class="degrau rev"><span class="g">0</span><h3>Só pessoas</h3><p>A etapa continua inteiramente com a equipe.</p></div>
+      <div class="degrau rev"><span class="g">1</span><h3>Copiloto</h3><p>A IA sugere ou prepara; uma pessoa decide e executa.</p></div>
+      <div class="degrau rev"><span class="g">2</span><h3>Execução conferida</h3><p>A IA executa e uma pessoa confere antes de valer.</p></div>
+      <div class="degrau rev"><span class="g">3</span><h3>Faixa aprovada</h3><p>A IA age sozinha dentro de limites escritos, com revisão periódica.</p></div>
+    </div>
+    <div class="regra rev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><strong>Regra que não se negocia:</strong> em decisões que envolvem saúde, dinheiro de terceiros ou direitos das pessoas, a IA fica no máximo como copiloto. Quem decide é sempre alguém da equipe.</p>
+    </div>
+  </div>
+</section>
+
+<section id="exemplo">
+  <div class="wrap">
+    <span class="olho rev">Na prática</span>
+    <h2 class="rev">Às vezes a melhor resposta nem é IA. A gente diz.</h2>
+    <p class="lead rev">Um exemplo de como o método pensa, num laboratório de prótese dentária que atende dezenas de dentistas e sofre com pedidos que chegam incompletos.</p>
+    <div class="exemplo">
+      <div class="ex-col rev">
+        <h3>O caminho comum</h3>
+        <ol>
+          <li>Contratar um assistente de IA para "atender melhor" os dentistas.</li>
+          <li>O pedido continua chegando sem informação essencial.</li>
+          <li>A equipe continua ligando para esclarecer, e o prazo continua longo.</li>
+        </ol>
+      </div>
+      <div class="ex-col depois rev">
+        <h3>O caminho CLARO</h3>
+        <ol>
+          <li><strong>Medir:</strong> quantos pedidos chegam incompletos, quantas horas se perdem em ligações, quanto tempo leva cada entrega.</li>
+          <li><strong>Arrumar o processo:</strong> um formulário padrão de entrada resolve a maior parte, sem IA nenhuma.</li>
+          <li><strong>Usar a IA onde ela rende:</strong> prever atrasos de prazo para avisar o dentista antes, com uma pessoa conferindo.</li>
+          <li><strong>Decidir com números:</strong> piloto com um grupo de dentistas, comparado ao ponto de partida.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="nota rev">Exemplo ilustrativo, criado para mostrar o raciocínio do método. Não é caso de cliente.</p>
+  </div>
+</section>
+
+<section id="pacotes" style="background:var(--pessego)">
+  <div class="wrap">
+    <span class="olho rev">Como contratar</span>
+    <h2 class="rev">Três formas de começar.</h2>
+    <p class="lead rev">Sempre um processo por vez. O valor é definido depois da conversa inicial, conforme o tamanho da empresa e do processo escolhido.</p>
+    <div class="pacotes">
+      <article class="pac rev">
+        <h3>Diagnóstico CLARO</h3>
+        <div class="dur">2 a 3 semanas</div>
+        <p class="para">Para quem ainda não sabe por onde começar, ou já gastou com ferramentas sem ver resultado.</p>
+        <ul>
+          <li>Até 4 entrevistas: dono, liderança, atendimento e execução</li>
+          <li>Teste de prontidão</li>
+          <li>Linha de base com os dados que a empresa já tem</li>
+          <li>Primeiro olhar sobre o processo</li>
+        </ul>
+        <div class="entrega"><b>Você sai com</b>Relatório de uma página com a recomendação: implantar, arrumar antes ou não investir agora.</div>
+      </article>
+      <article class="pac dest rev">
+        <span class="tag">Mais completo</span>
+        <h3>Redesenho e piloto</h3>
+        <div class="dur">11 a 13 semanas</div>
+        <p class="para">As cinco fases aplicadas a um processo, do diagnóstico ao piloto medido.</p>
+        <ul>
+          <li>Tudo do Diagnóstico (se já contratado, o valor é abatido)</li>
+          <li>Oficina de mapeamento e redesenho do processo</li>
+          <li>Matriz de autonomia e ficha de governança</li>
+          <li>Configuração das ferramentas, em nome da sua empresa</li>
+          <li>Treinamento e acompanhamento semanal do piloto</li>
+        </ul>
+        <div class="entrega"><b>Você sai com</b>Piloto executado, medido contra o ponto de partida, e a decisão documentada: ampliar, ajustar ou parar.</div>
+      </article>
+      <article class="pac rev">
+        <h3>Implantação acompanhada</h3>
+        <div class="dur">3 meses, depois do piloto</div>
+        <p class="para">Para levar o processo que deu certo às demais áreas ou unidades.</p>
+        <ul>
+          <li>Ampliação para outras áreas ou unidades</li>
+          <li>Revisão mensal de indicadores, exceções e regras</li>
+          <li>Ajustes e treinamento de quem chega</li>
+        </ul>
+        <div class="entrega"><b>Você sai com</b>Processo ampliado, com dono, painel e uma rotina de revisão que a equipe toca sozinha.</div>
+      </article>
+    </div>
+    <div class="compromisso rev">
+      <div class="selo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <div>
+        <h3>Se não for hora de investir em IA, você paga só o diagnóstico.</h3>
+        <p>Se o diagnóstico recomendar não seguir, o projeto termina ali. Não prometemos resultado financeiro: prometemos método, medição honesta e decisão com números.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teste">
+  <div class="wrap">
+    <span class="olho rev">Teste rápido</span>
+    <h2 class="rev">Sua empresa está pronta para um piloto?</h2>
+    <p class="lead rev">Seis perguntas sobre o processo que mais incomoda hoje. Responda com sinceridade; nada é enviado, a conta é feita aqui na página.</p>
+    <div class="teste">
+      <div class="itens" id="itens"></div>
+      <aside class="result" aria-live="polite">
+        <div class="pts"><span id="pts">0</span><small> de 12</small></div>
+        <div class="medidor"><i id="barra"></i></div>
+        <h3 id="r-tit">Responda as seis perguntas</h3>
+        <p id="r-txt">O resultado aparece aqui, com a recomendação do método para o seu momento.</p>
+        <p class="falta" id="falta">Faltam 6 respostas.</p>
+        <a class="btn btn-p" href="#contato">Conversar sobre o resultado</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="encaixe" style="padding-top:0">
+  <div class="wrap">
+    <span class="olho rev">Encaixe</span>
+    <h2 class="rev">Para quem é, e para quem não é.</h2>
+    <div class="encaixe">
+      <div class="enc sim rev">
+        <h3><span>+</span>É para você se</h3>
+        <ul>
+          <li>Existe um problema concreto, de preferência com número: clientes perdidos, horas de retrabalho, prazos estourados.</li>
+          <li>Quem decide participa da conversa.</li>
+          <li>Dá para reservar cerca de 3 horas por semana de quem cuida do processo.</li>
+          <li>Você quer decidir com números, não com impressão.</li>
+        </ul>
+      </div>
+      <div class="enc nao rev">
+        <h3><span>&minus;</span>Não é para você se</h3>
+        <ul>
+          <li>O motivo é só "todo mundo está usando IA".</li>
+          <li>A ideia é colocar IA na empresa toda de uma vez.</li>
+          <li>Você quer receber tudo pronto, sem envolver a equipe.</li>
+          <li>Precisa de garantia de retorno em poucas semanas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="escuro" id="dados">
+  <div class="wrap">
+    <span class="olho rev">Seus dados</span>
+    <h2 class="rev">Cuidado com dados desde a primeira conversa.</h2>
+    <div class="dados">
+      <div class="dado rev"><h3>Sigilo antes de tudo</h3><p>Acordo de sigilo assinado antes de recebermos qualquer dado, planilha ou acesso.</p></div>
+      <div class="dado rev"><h3>Só o necessário</h3><p>Usamos apenas os dados que o diagnóstico exige, seguindo a LGPD.</p></div>
+      <div class="dado rev"><h3>Tudo em seu nome</h3><p>As ferramentas e licenças ficam em nome da sua empresa. Nada fica preso a nós.</p></div>
+      <div class="dado rev"><h3>Checklist antes de ligar</h3><p>Nenhuma automação entra no ar sem passar pelo checklist de proteção de dados.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas">
+  <div class="wrap">
+    <span class="olho rev">Dúvidas</span>
+    <h2 class="rev">Perguntas que costumam aparecer.</h2>
+    <div class="faq">
+      <details class="rev"><summary>Já usamos o ChatGPT. Isso não basta?</summary><p>É um ótimo começo: a equipe já tem familiaridade. A diferença é que aqui escolhemos um processo, medimos onde ele perde tempo ou cliente e decidimos, com regras escritas, o que a IA faz ali. Ferramenta solta ajuda quem a usa; processo redesenhado ajuda a empresa.</p></details>
+      <details class="rev"><summary>E se não der resultado?</summary><p>O piloto é pequeno e tem critério de decisão escrito antes de começar. Se os números não vierem, a decisão é ajustar ou parar, e você sabe exatamente por quê. E se o diagnóstico mostrar que não é hora de investir em IA, o projeto termina ali e você paga só essa etapa.</p></details>
+      <details class="rev"><summary>Quanto custa?</summary><p>Depende do tamanho da empresa e do processo escolhido, por isso o valor sai depois da conversa inicial. Na proposta, comparamos o investimento com o custo do problema que você mesmo descreveu. Se preferir começar pequeno, o Diagnóstico CLARO já entrega a recomendação e o ponto de partida medido.</p></details>
+      <details class="rev"><summary>Minha equipe não vai aceitar.</summary><p>Por isso a equipe participa do mapeamento desde a primeira semana, e o piloto começa pequeno. Quem executa ajuda a desenhar o processo novo. Quando aparece resistência, investigamos a causa antes de cobrar.</p></details>
+      <details class="rev"><summary>Não tenho tempo para isso agora.</summary><p>O projeto pede cerca de 3 horas por semana de quem cuida do processo. Se nem isso couber agora, é melhor esperar: sem alguém responsável, o processo novo não se sustenta, e a gente prefere dizer isso antes.</p></details>
+      <details class="rev"><summary>Vocês desenvolvem software sob medida?</summary><p>Não é o foco. Trabalhamos com ferramentas disponíveis no mercado, contratadas em nome da sua empresa. Se o projeto pedir algo sob medida, isso vira uma proposta à parte.</p></details>
+      <details class="rev"><summary>Minha empresa não tem dados organizados. Dá para começar?</summary><p>Dá. Se não houver registro, contamos à mão por alguns dias para ter um ponto de partida. E se o teste de prontidão mostrar que é cedo, a recomendação é um plano curto de arrumação antes de qualquer IA.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contato">
+  <div class="wrap">
+    <span class="olho rev">Próximo passo</span>
+    <h2 class="rev">Uma conversa de 30 minutos sobre o processo que mais te custa hoje.</h2>
+    <p class="lead rev">Você conta onde a operação trava. A gente diz, com franqueza, se o Método CLARO faz sentido agora, e por qual pacote começar.</p>
+    <div class="acoes rev" id="acao-contato">
+      <a class="btn btn-p" id="btn-contato" href="#contato">Agendar conversa</a>
+    </div>
+    <p class="obs rev" id="obs-contato">Para agendar, responda à mensagem de quem te enviou esta página.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Nenética · Método CLARO · implantação de IA para pequenas e médias empresas</span>
+    <span>Não prometemos resultado financeiro: medimos e mostramos os resultados.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Contato: preencha com o número do WhatsApp (só dígitos, com DDI e DDD, ex.: 5582999999999). Vazio = sem botão externo. */
+  var WHATSAPP = "";
+  if (WHATSAPP) {
+    var b = document.getElementById('btn-contato');
+    b.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Olá! Vi a página do Método CLARO e quero agendar a conversa de 30 minutos.');
+    b.target = '_blank'; b.rel = 'noopener';
+    document.getElementById('obs-contato').textContent = 'A conversa é sem compromisso.';
+  } else {
+    document.getElementById('acao-contato').hidden = true;
+  }
+
+  /* topo sólido ao rolar */
+  var topo = document.getElementById('topo');
+  function t(){ topo.classList.toggle('solida', window.scrollY > 40); }
+  window.addEventListener('scroll', t, {passive:true}); t();
+
+  /* revelar ao rolar */
+  var els = document.querySelectorAll('.rev');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('vis'); }); }
+
+  /* abas do método */
+  var abas = Array.prototype.slice.call(document.querySelectorAll('.aba'));
+  function abrir(aba, foco){
+    abas.forEach(function(a){
+      var sel = a === aba;
+      a.setAttribute('aria-selected', sel); a.tabIndex = sel ? 0 : -1;
+      document.getElementById(a.getAttribute('aria-controls')).hidden = !sel;
+    });
+    if (foco) aba.focus();
+  }
+  abas.forEach(function(a, i){
+    a.addEventListener('click', function(){ abrir(a); });
+    a.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = abas[(i+1) % abas.length];
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = abas[(i-1+abas.length) % abas.length];
+      if (n){ e.preventDefault(); abrir(n, true); }
+    });
+  });
+
+  /* teste de prontidão */
+  var perguntas = [
+    ['As informações do processo estão registradas.', 'Existe cadastro, planilha ou sistema com os dados de cada pedido ou atendimento, e dá para confiar neles.'],
+    ['O processo está escrito.', 'Alguém novo consegue seguir o passo a passo sem perguntar a quem faz hoje.'],
+    ['O processo tem um dono.', 'Uma pessoa responde pelo resultado do processo inteiro, não só pela própria etapa.'],
+    ['A equipe tem tempo para aprender.', 'Há espaço na rotina para treinar e ajustar, sem depender de hora extra.'],
+    ['Os sistemas conversam.', 'A informação passa de uma área para outra sem ser digitada de novo.'],
+    ['A liderança patrocina.', 'Quem decide está disposto a mudar regras, liberar tempo da equipe e cobrar o uso.']
+  ];
+  var notas = new Array(perguntas.length).fill(null);
+  var box = document.getElementById('itens');
+  perguntas.forEach(function(p, i){
+    var d = document.createElement('div'); d.className = 'item';
+    d.innerHTML = '<div class="q">' + (i+1) + '. ' + p[0] + '</div><div class="d">' + p[1] + '</div>' +
+      '<div class="ops" role="group" aria-label="Pergunta ' + (i+1) + '">' +
+      '<button type="button" data-v="0" aria-pressed="false">Não</button>' +
+      '<button type="button" data-v="1" aria-pressed="false">Em parte</button>' +
+      '<button type="button" data-v="2" aria-pressed="false">Sim</button></div>';
+    d.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        notas[i] = +b.dataset.v;
+        d.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); });
+        calcular();
+      });
+    });
+    box.appendChild(d);
+  });
+  function calcular(){
+    var soma = 0, resp = 0;
+    notas.forEach(function(n){ if (n !== null){ soma += n; resp++; } });
+    document.getElementById('pts').textContent = soma;
+    document.getElementById('barra').style.width = (soma / 12 * 100) + '%';
+    var falta = perguntas.length - resp;
+    document.getElementById('falta').textContent = falta ? ('Faltam ' + falta + (falta === 1 ? ' resposta.' : ' respostas.')) : 'Resultado indicativo. O teste completo é feito no diagnóstico, com dados.';
+    var tit = 'Continue respondendo', txt = 'O resultado aparece aqui, com a recomendação do método para o seu momento.';
+    if (!falta) {
+      if (notas[2] === 0 || notas[5] === 0) {
+        tit = 'Antes da IA: definir quem responde';
+        txt = (notas[2] === 0 ? 'Sem um dono do processo' : 'Sem o apoio de quem decide') + ', o processo novo não se sustenta, seja qual for a soma. O primeiro passo é resolver isso; o Diagnóstico CLARO ajuda a organizar.';
+      } else if (soma <= 5) {
+        tit = 'Hora de arrumar a casa primeiro';
+        txt = 'A IA ainda acrescentaria pouco. O caminho é um plano curto de arrumação, de 30 a 60 dias, atacando os pontos mais fracos. Depois, vale refazer o teste.';
+      } else if (soma <= 9) {
+        tit = 'Dá para começar pequeno';
+        txt = 'Um piloto num processo só é viável, corrigindo os pontos fracos em paralelo. O Redesenho e piloto foi pensado para esse momento.';
+      } else {
+        tit = 'Pronta para um piloto ambicioso';
+        txt = 'A base existe para um piloto com meta ambiciosa, medido contra o ponto de partida desde a primeira semana.';
+      }
+    }
+    document.getElementById('r-tit').textContent = tit;
+    document.getElementById('r-txt').textContent = txt;
+  }
+})();
+</script>
+</body>
+</html>
