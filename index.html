@@ -257,6 +257,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
   .rev{opacity:1;transform:none}
+  /* a órbita CLARO continua girando, mais devagar, mesmo com 'Reduzir movimento' ligado */
+  .orbita .giro{animation:gira 30s linear infinite!important}
+  .orbita .giro .letra{animation:contra 30s linear infinite!important}
 }
 </style>
 </head>
@@ -640,7 +643,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <footer>
   <div class="wrap">
     <span>Nenética · Método CLARO · implantação de IA para pequenas e médias empresas</span>
-    <span>Não prometemos resultado financeiro: medimos e mostramos os resultados. <span style="opacity:.6">Versão 4</span></span>
+    <span>Não prometemos resultado financeiro: medimos e mostramos os resultados. <span style="opacity:.6">Versão 5</span></span>
   </div>
 </footer>
 
