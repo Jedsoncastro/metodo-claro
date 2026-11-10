@@ -57,7 +57,7 @@ h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
 .hero{position:relative;background:radial-gradient(1100px 600px at 85% 10%,rgba(242,106,72,.22),transparent 60%),radial-gradient(800px 500px at 0% 100%,rgba(253,152,110,.10),transparent 60%),var(--tinta);color:#fff;padding:150px 0 110px;overflow:hidden}
 .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 70%);pointer-events:none}
 .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(38px,5.6vw,66px);font-weight:700;max-width:16ch}
+.hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:700;max-width:20ch}
 .hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--coral),var(--coral-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p.lead{color:#C9CFD6;margin-top:24px}
 .acoes{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
@@ -71,8 +71,11 @@ h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
 .orbita .logo{position:absolute;inset:34%;display:grid;place-items:center;animation:flutua 6s ease-in-out infinite}
 .orbita .logo img{filter:drop-shadow(0 18px 30px rgba(242,106,72,.45))}
 .orbita .letra{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font:700 19px/1 Poppins,sans-serif;color:#fff;background:rgba(39,45,51,.9);border:1px solid rgba(253,152,110,.5);box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
-.giro{position:absolute;inset:0;animation:gira 60s linear infinite}
-.giro .letra{animation:contra 60s linear infinite}
+.giro{position:absolute;inset:0;animation:gira 22s linear infinite}
+.giro .letra{animation:contra 22s linear infinite}
+.orbita .anel.a2{border-style:dashed;animation:gira 40s linear infinite reverse}
+.orbita .eletron{position:absolute;inset:14%;animation:gira 9s linear infinite}
+.orbita .eletron::before{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--coral-2);box-shadow:0 0 14px 3px rgba(253,152,110,.7)}
 @keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes gira{to{transform:rotate(360deg)}}
 @keyframes contra{to{transform:rotate(-360deg)}}
@@ -84,6 +87,18 @@ h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
 .card h3{font-size:21px;margin:14px 0 10px}
 .card p{color:var(--texto-2);font-size:16px}
 .frase{margin-top:56px;padding:34px 38px;border-radius:var(--raio);background:var(--pessego);border-left:6px solid var(--coral);font:600 clamp(19px,2.2vw,24px)/1.45 Poppins,sans-serif;max-width:860px}
+
+.custo{margin-top:28px;padding:30px 34px;border-radius:var(--raio);background:#fff;border:1px solid var(--linha);max-width:860px}
+.custo h3{font-size:21px;margin-bottom:12px}
+.custo ul{list-style:none;display:grid;gap:8px;margin-bottom:14px}
+.custo li{padding-left:22px;position:relative;color:var(--texto)}
+.custo li::before{content:"?";position:absolute;left:0;top:0;font:700 16px/1.6 Poppins,sans-serif;color:var(--coral)}
+.custo p{color:var(--texto-2)}
+.linha{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;counter-reset:s}
+.linha li{position:relative;padding:20px 20px 20px;border-top:3px solid var(--coral);background:#fff;border-radius:0 0 14px 14px;color:var(--texto-2);font-size:15.5px}
+.linha b{display:block;font:700 15px/1 Poppins,sans-serif;color:var(--coral-deep);margin-bottom:8px;letter-spacing:.02em}
+@media (max-width:980px){.linha{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.linha{grid-template-columns:1fr}}
 
 /* método */
 .claro-grid{display:grid;grid-template-columns:320px 1fr;gap:40px;margin-top:56px;align-items:start}
@@ -251,7 +266,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <a href="#pacotes">Pacotes</a>
       <a href="#teste">Teste rápido</a>
       <a href="#duvidas">Dúvidas</a>
-      <a class="btn btn-p" href="#contato">Agendar conversa</a>
+      <a class="btn btn-p js-agendar" href="#teste" data-sem="Fazer o teste">Agendar conversa</a>
     </nav>
   </div>
 </header>
@@ -262,26 +277,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <div>
       <span class="olho">Nenética · Método CLARO</span>
-      <h1>IA na sua empresa, começando pelo <em>processo certo</em>.</h1>
-      <p class="lead">Muita empresa compra ferramenta de IA e não vê diferença no caixa nem no atendimento. A gente faz o caminho inverso: entende o que o seu cliente vive, arruma o processo com a sua equipe e só então coloca a IA para trabalhar, num piloto medido e com regras escritas.</p>
+      <h1>Antes de pagar por mais uma ferramenta de IA, descubra em qual <em>processo</em> ela vale a pena.</h1>
+      <p class="lead">Se você já assinou IA e o retrabalho, o atraso e a reclamação do cliente continuam iguais, o problema provavelmente não é a ferramenta. A gente começa pelo processo que mais custa à sua empresa, arruma esse processo com a sua equipe, testa a IA num piloto pequeno e mede antes e depois. Se não for hora de investir, você fica sabendo já no diagnóstico.</p>
       <div class="acoes">
-        <a class="btn btn-p" href="#contato">Agendar conversa de 30 minutos</a>
+        <a class="btn btn-p js-agendar" href="#teste" data-sem="Fazer o teste rápido">Quero a conversa de 30 minutos</a>
         <a class="btn btn-s" href="#metodo">Ver como funciona</a>
       </div>
       <div class="selos">
+        <span>Se não for hora, você paga só o diagnóstico</span>
         <span>Para pequenas e médias empresas</span>
-        <span>Um processo por vez</span>
         <span>Medição antes e depois</span>
       </div>
     </div>
     <div class="orbita" aria-hidden="true">
-      <div class="anel"></div><div class="anel a2"></div><div class="anel a3"></div>
+      <div class="anel"></div><div class="anel a2"></div><div class="anel a3"></div><div class="eletron"></div>
       <div class="giro">
         <span class="letra" style="left:50%;top:0%">C</span>
-        <span class="letra" style="left:97.6%;top:34.5%">L</span>
-        <span class="letra" style="left:79.4%;top:90.5%">A</span>
-        <span class="letra" style="left:20.6%;top:90.5%">R</span>
-        <span class="letra" style="left:2.4%;top:34.5%">O</span>
+        <span class="letra" style="left:2.4%;top:34.5%">L</span>
+        <span class="letra" style="left:20.6%;top:90.5%">A</span>
+        <span class="letra" style="left:79.4%;top:90.5%">R</span>
+        <span class="letra" style="left:97.6%;top:34.5%">O</span>
       </div>
       <div class="logo"><img src="icone.png" alt="" width="192" height="174"></div>
     </div>
@@ -292,146 +307,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <span class="olho rev">O problema</span>
     <h2 class="rev">Comprar uma ferramenta não é implantar IA.</h2>
-    <p class="lead rev">Quando a IA entra antes do processo, ela costuma acelerar a bagunça que já existia. Três sinais aparecem quase sempre:</p>
+    <p class="lead rev">Quando a IA entra antes do processo, ela acelera a bagunça que já existia. Veja se algum destes cenários parece com a sua empresa:</p>
     <div class="cards3">
       <article class="card rev">
         <span class="num">01</span>
         <h3>Ferramenta solta</h3>
-        <p>Cada pessoa usa a IA do seu jeito. Ajuda quem usa, mas o processo da empresa continua igual, com as mesmas travas e os mesmos retrabalhos.</p>
+        <p>A assinatura está paga, uma ou duas pessoas usam do próprio jeito, e o pedido continua chegando sem informação. Ajudou quem usa; a empresa continua igual.</p>
       </article>
       <article class="card rev">
         <span class="num">02</span>
         <h3>Ninguém é dono</h3>
-        <p>Não fica claro o que a máquina pode decidir sozinha, quem confere e o que fazer quando ela erra. O risco aparece justamente onde ninguém está olhando.</p>
+        <p>A IA respondeu errado a um cliente. Quem devia ter conferido? Como se desfaz? Se ninguém sabe responder, o risco está exatamente aí.</p>
       </article>
       <article class="card rev">
         <span class="num">03</span>
         <h3>Ninguém mede</h3>
-        <p>Sem um ponto de partida medido, ninguém sabe dizer se melhorou. A conversa vira impressão, e o investimento vira aposta.</p>
+        <p>Alguém pergunta se a IA valeu o que custou, e a resposta é "acho que sim". Sem o número de antes, não há como saber, e o investimento vira aposta.</p>
       </article>
     </div>
-    <p class="frase rev">A pergunta certa não é "qual IA usar?". É "onde o meu processo trava, e o que a IA pode assumir ali com segurança?".</p>
-  </div>
-</section>
-
-<section class="escuro" id="metodo">
-  <div class="wrap">
-    <span class="olho rev">O que é</span>
-    <h2 class="rev">Cinco fases, uma ordem que não se pula.</h2>
-    <p class="lead rev">O Método CLARO é a forma como conduzimos cada projeto. A ferramenta é a última escolha, nunca a primeira. Clique em cada fase.</p>
-
-    <div class="claro-grid">
-      <div class="abas" role="tablist" aria-label="Fases do Método CLARO">
-        <button class="aba" role="tab" id="t-c" aria-controls="p-c" aria-selected="true"><b>C</b>Cliente</button>
-        <button class="aba" role="tab" id="t-l" aria-controls="p-l" aria-selected="false" tabindex="-1"><b>L</b>Leitura interna</button>
-        <button class="aba" role="tab" id="t-a" aria-controls="p-a" aria-selected="false" tabindex="-1"><b>A</b>Arquitetura do processo</button>
-        <button class="aba" role="tab" id="t-r" aria-controls="p-r" aria-selected="false" tabindex="-1"><b>R</b>Responsabilidade</button>
-        <button class="aba" role="tab" id="t-o" aria-controls="p-o" aria-selected="false" tabindex="-1"><b>O</b>Operação</button>
-      </div>
-      <div>
-        <div class="painel" role="tabpanel" id="p-c" aria-labelledby="t-c">
-          <span class="fase">Fase C · Cliente</span>
-          <h3>Começamos por quem paga a conta.</h3>
-          <p>Entrevistamos clientes e equipe para entender o que a empresa promete e onde essa promessa falha na prática.</p>
-          <p class="pergunta">O que o seu cliente espera, e em que momento ele se frustra?</p>
-          <ul><li>Ficha da promessa da empresa</li><li>Mapa dos atritos na jornada do cliente</li></ul>
-        </div>
-        <div class="painel" role="tabpanel" id="p-l" aria-labelledby="t-l" hidden>
-          <span class="fase">Fase L · Leitura interna</span>
-          <h3>Uma fotografia honesta de dentro.</h3>
-          <p>Testamos se a empresa está pronta para a mudança e medimos o ponto de partida com os dados que ela já tem. Se não houver dados, contamos à mão por alguns dias.</p>
-          <p class="pergunta">A empresa aguenta a mudança, e o que exatamente precisa mudar?</p>
-          <ul><li>Teste de prontidão</li><li>Linha de base e metas</li><li>O problema escrito em uma frase, com número e prazo</li></ul>
-        </div>
-        <div class="painel" role="tabpanel" id="p-a" aria-labelledby="t-a" hidden>
-          <span class="fase">Fase A · Arquitetura do processo</span>
-          <h3>Desenhamos o trabalho com quem faz o trabalho.</h3>
-          <p>Numa oficina com a equipe, mapeamos o processo como ele acontece de verdade, achamos a etapa que segura todo o resto e redesenhamos esse trecho. Às vezes a solução nem é IA, e a gente diz isso.</p>
-          <p class="pergunta">Onde o trabalho trava, e qual é o desenho melhor?</p>
-          <ul><li>Mapa do processo atual</li><li>Trava identificada</li><li>Trecho redesenhado</li></ul>
-        </div>
-        <div class="painel" role="tabpanel" id="p-r" aria-labelledby="t-r" hidden>
-          <span class="fase">Fase R · Responsabilidade</span>
-          <h3>Por escrito: o que é da IA e o que é das pessoas.</h3>
-          <p>Para cada etapa, definimos quanto a IA pode fazer sozinha, quem confere, o que ela nunca pode tocar e como desfazer um erro.</p>
-          <p class="pergunta">Em cada etapa, quem executa: a máquina ou alguém da equipe?</p>
-          <ul><li>Matriz de autonomia</li><li>Ficha de governança: rastro, limite, material proibido, como desfazer, porta humana e revisão</li></ul>
-        </div>
-        <div class="painel" role="tabpanel" id="p-o" aria-labelledby="t-o" hidden>
-          <span class="fase">Fase O · Operação</span>
-          <h3>Piloto pequeno, medido, com decisão escrita.</h3>
-          <p>Configuramos as ferramentas em nome da sua empresa, treinamos a equipe e acompanhamos o piloto toda semana. No fim, comparamos com o ponto de partida e decidimos juntos: ampliar, ajustar ou parar.</p>
-          <p class="pergunta">Como testar, implantar, medir e manter funcionando?</p>
-          <ul><li>Plano de piloto com critério de decisão</li><li>Painel com quatro linhas: caixa, cliente, acerto e ritmo</li><li>Rotina de revisão que a própria equipe conduz</li></ul>
-        </div>
-      </div>
+    <p class="frase rev">A pergunta certa não é "qual IA usar?", e sim "onde o meu processo trava e o que a IA pode assumir ali com segurança?"</p>
+    <div class="custo rev">
+      <h3>Faça a conta da sua empresa.</h3>
+      <ul>
+        <li>Quantas vezes por semana alguém para o que está fazendo para ligar de volta, corrigir ou refazer um pedido?</li>
+        <li>Quantos clientes desistiram esperando resposta ou prazo?</li>
+        <li>Quantas horas da sua própria semana vão para apagar esse incêndio?</li>
+      </ul>
+      <p>Esse custo já sai do caixa todo mês, com ou sem IA. A diferença é que hoje ninguém sabe o tamanho dele. O diagnóstico leva de 2 a 3 semanas e começa justamente por medir isso.</p>
     </div>
   </div>
 </section>
 
-<section id="entregas">
-  <div class="wrap">
-    <span class="olho rev">O que você recebe</span>
-    <h2 class="rev">Nada de relatório de cem páginas na gaveta.</h2>
-    <p class="lead rev">Cada entrega é curta, escrita para ser usada pela sua equipe na semana seguinte.</p>
-    <div class="entregas">
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
-        <h3>Relatório de uma página</h3>
-        <p>A recomendação em linguagem simples: implantar IA num processo definido, arrumar processo e dados antes, ou não investir agora.</p>
-      </article>
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8M18 8l-5 8"/></svg>
-        <h3>Mapa do processo</h3>
-        <p>Como o trabalho acontece hoje, onde ele trava e o trecho redesenhado, feito junto com quem executa.</p>
-      </article>
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4"/><path d="M4 20V4"/></svg>
-        <h3>Matriz de autonomia</h3>
-        <p>Etapa por etapa, até onde a IA pode ir sozinha e onde uma pessoa precisa conferir ou decidir.</p>
-      </article>
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-        <h3>Ficha de governança</h3>
-        <p>As regras de segurança do uso da IA: o que fica registrado, o que ela não toca, como desfazer e quando chamar alguém.</p>
-      </article>
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
-        <h3>Painel de quatro linhas</h3>
-        <p>Caixa, cliente, acerto e ritmo, medidos antes e depois. É o que mostra, com número, se valeu a pena.</p>
-      </article>
-      <article class="ent rev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
-        <h3>Equipe treinada</h3>
-        <p>Treinamento de quem vai usar e uma rotina de revisão que a própria equipe consegue conduzir depois que saímos.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="escuro" id="seguranca">
-  <div class="wrap">
-    <span class="olho rev">O diferencial</span>
-    <h2 class="rev">A IA sobe de degrau só quando provou que pode.</h2>
-    <p class="lead rev">Em vez de "ligar a IA e torcer", cada etapa do processo recebe um degrau de autonomia. Ela começa embaixo e só sobe com números do piloto na mão.</p>
-    <div class="escada">
-      <div class="degrau rev"><span class="g">0</span><h3>Só pessoas</h3><p>A etapa continua inteiramente com a equipe.</p></div>
-      <div class="degrau rev"><span class="g">1</span><h3>Copiloto</h3><p>A IA sugere ou prepara; uma pessoa decide e executa.</p></div>
-      <div class="degrau rev"><span class="g">2</span><h3>Execução conferida</h3><p>A IA executa e uma pessoa confere antes de valer.</p></div>
-      <div class="degrau rev"><span class="g">3</span><h3>Faixa aprovada</h3><p>A IA age sozinha dentro de limites escritos, com revisão periódica.</p></div>
-    </div>
-    <div class="regra rev">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M12 8v5M12 16h.01"/></svg>
-      <p><strong>Regra que não se negocia:</strong> em decisões que envolvem saúde, dinheiro de terceiros ou direitos das pessoas, a IA fica no máximo como copiloto. Quem decide é sempre alguém da equipe.</p>
-    </div>
-  </div>
-</section>
-
-<section id="exemplo">
+<section id="exemplo" style="background:var(--pessego)">
   <div class="wrap">
     <span class="olho rev">Na prática</span>
     <h2 class="rev">Às vezes a melhor resposta nem é IA. A gente diz.</h2>
-    <p class="lead rev">Um exemplo de como o método pensa, num laboratório de prótese dentária que atende dezenas de dentistas e sofre com pedidos que chegam incompletos.</p>
+    <p class="lead rev">Um exemplo ilustrativo de como o método pensa: um laboratório de prótese dentária que atende dezenas de dentistas e sofre com pedidos que chegam incompletos.</p>
     <div class="exemplo">
       <div class="ex-col rev">
         <h3>O caminho comum</h3>
@@ -446,7 +357,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <ol>
           <li><strong>Medir:</strong> quantos pedidos chegam incompletos, quantas horas se perdem em ligações, quanto tempo leva cada entrega.</li>
           <li><strong>Arrumar o processo:</strong> um formulário padrão de entrada resolve a maior parte, sem IA nenhuma.</li>
-          <li><strong>Usar a IA onde ela rende:</strong> prever atrasos de prazo para avisar o dentista antes, com uma pessoa conferindo.</li>
+          <li><strong>Usar a IA onde ela rende:</strong> prever atrasos para avisar o dentista antes, com uma pessoa conferindo.</li>
           <li><strong>Decidir com números:</strong> piloto com um grupo de dentistas, comparado ao ponto de partida.</li>
         </ol>
       </div>
@@ -455,20 +366,160 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
+<section class="escuro" id="metodo">
+  <div class="wrap">
+    <span class="olho rev">O que é</span>
+    <h2 class="rev">Cinco fases, uma ordem que não se pula.</h2>
+    <p class="lead rev">O Método CLARO é a forma como conduzimos cada projeto. A ferramenta é a última escolha, nunca a primeira. Toque em cada fase para ver o que acontece nela.</p>
+
+    <div class="claro-grid">
+      <div class="abas" role="tablist" aria-label="Fases do Método CLARO">
+        <button class="aba" role="tab" id="t-c" aria-controls="p-c" aria-selected="true"><b>C</b>Cliente</button>
+        <button class="aba" role="tab" id="t-l" aria-controls="p-l" aria-selected="false" tabindex="-1"><b>L</b>Leitura interna</button>
+        <button class="aba" role="tab" id="t-a" aria-controls="p-a" aria-selected="false" tabindex="-1"><b>A</b>Arquitetura do processo</button>
+        <button class="aba" role="tab" id="t-r" aria-controls="p-r" aria-selected="false" tabindex="-1"><b>R</b>Responsabilidade</button>
+        <button class="aba" role="tab" id="t-o" aria-controls="p-o" aria-selected="false" tabindex="-1"><b>O</b>Operação</button>
+      </div>
+      <div>
+        <div class="painel" role="tabpanel" id="p-c" aria-labelledby="t-c">
+          <span class="fase">Fase C · Cliente</span>
+          <h3>Começamos por quem paga a conta.</h3>
+          <p>Entrevistamos a equipe e lemos reclamações e dados de atendimento para entender o que a empresa promete e onde essa promessa falha na prática.</p>
+          <p class="pergunta">O que o seu cliente espera, e em que momento ele se frustra?</p>
+          <ul><li>Ficha da promessa da empresa</li><li>Mapa dos atritos na jornada do cliente</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-l" aria-labelledby="t-l" hidden>
+          <span class="fase">Fase L · Leitura interna</span>
+          <h3>Uma fotografia honesta de dentro.</h3>
+          <p>Testamos se a empresa está pronta para a mudança e medimos o ponto de partida com os dados que ela já tem. Se não houver dados, contamos à mão por alguns dias.</p>
+          <p class="pergunta">A empresa aguenta a mudança, e o que exatamente precisa mudar?</p>
+          <ul><li>Teste de prontidão</li><li>Ponto de partida medido e metas</li><li>O problema escrito em uma frase, com número e prazo</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-a" aria-labelledby="t-a" hidden>
+          <span class="fase">Fase A · Arquitetura do processo</span>
+          <h3>Desenhamos o trabalho com quem faz o trabalho.</h3>
+          <p>Numa oficina com a equipe, mapeamos o processo como ele acontece de verdade, achamos a etapa que segura todo o resto e redesenhamos esse trecho. Às vezes a solução nem é IA, e a gente diz isso.</p>
+          <p class="pergunta">Onde o trabalho trava, e qual é o desenho melhor?</p>
+          <ul><li>Mapa do processo atual</li><li>Trava identificada</li><li>Trecho redesenhado</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-r" aria-labelledby="t-r" hidden>
+          <span class="fase">Fase R · Responsabilidade</span>
+          <h3>Por escrito: o que é da IA e o que é das pessoas.</h3>
+          <p>Para cada etapa, definimos quanto a IA pode fazer sozinha, quem confere, o que ela nunca pode tocar e como desfazer um erro.</p>
+          <p class="pergunta">Em cada etapa, quem executa: a máquina ou alguém da equipe?</p>
+          <ul><li>Matriz de autonomia: uma tabela que diz, etapa por etapa, até onde a IA vai sozinha</li><li>Ficha de governança: o que fica registrado, os limites da IA, o que ela não pode tocar, como desfazer um erro, quando chamar uma pessoa e quando revisar as regras</li></ul>
+        </div>
+        <div class="painel" role="tabpanel" id="p-o" aria-labelledby="t-o" hidden>
+          <span class="fase">Fase O · Operação</span>
+          <h3>Piloto pequeno, medido, com decisão escrita.</h3>
+          <p>Configuramos as ferramentas em nome da sua empresa, treinamos a equipe e acompanhamos o piloto toda semana. No fim, comparamos com o ponto de partida e decidimos juntos: ampliar, ajustar ou parar.</p>
+          <p class="pergunta">Como testar, implantar, medir e manter funcionando?</p>
+          <ul><li>Plano de piloto com critério de decisão</li><li>Painel com quatro medidas: caixa, cliente, acerto e ritmo</li><li>Rotina de revisão que a própria equipe conduz</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="entregas">
+  <div class="wrap">
+    <span class="olho rev">O que você recebe</span>
+    <h2 class="rev">Nada de relatório de cem páginas na gaveta.</h2>
+    <p class="lead rev">Cada entrega é curta e feita para a sua equipe usar. E você vê trabalho concreto desde a primeira semana:</p>
+    <ol class="linha rev">
+      <li><b>Semana 1</b>A promessa da sua empresa e o mapa dos pontos em que o cliente se frustra.</li>
+      <li><b>Semana 2</b>Relatório de uma página com a recomendação e o problema escrito em uma frase.</li>
+      <li><b>Semana 5</b>As regras do que é da IA e do que é das pessoas, aprovadas por você antes de qualquer automação ser ligada.</li>
+      <li><b>Semana 12</b>O resultado do piloto comparado ao ponto de partida e a decisão por escrito: ampliar, ajustar ou parar.</li>
+    </ol>
+    <p class="nota rev">Prazos do pacote Redesenho e piloto. Processos mensais, como fechamento ou cobrança, levam 4 semanas a mais.</p>
+    <div class="entregas">
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+        <h3>Relatório de uma página</h3>
+        <p>A recomendação em linguagem simples: implantar IA num processo definido, arrumar processo e dados antes, ou não investir agora.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8M18 8l-5 8"/></svg>
+        <h3>Mapa do processo</h3>
+        <p>Como o trabalho acontece hoje, onde ele trava e o trecho redesenhado, feito junto com quem executa.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4"/><path d="M4 20V4"/></svg>
+        <h3>Matriz de autonomia</h3>
+        <p>Uma tabela que diz, etapa por etapa, até onde a IA pode ir sozinha e onde uma pessoa precisa conferir ou decidir.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Ficha de governança</h3>
+        <p>As regras de segurança do uso da IA: o que fica registrado, o que ela não toca, como desfazer e quando chamar alguém.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        <h3>Painel de quatro medidas</h3>
+        <p>Caixa (quanto entra ou sai por causa do processo), cliente (desistências e reclamações), acerto (entregas certas na primeira vez) e ritmo (dias do pedido à entrega), antes e depois. É o que mostra, com número, se valeu a pena.</p>
+      </article>
+      <article class="ent rev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></svg>
+        <h3>Equipe treinada</h3>
+        <p>Treinamento de quem vai usar e uma rotina de revisão que a própria equipe consegue conduzir depois que saímos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="escuro" id="seguranca">
+  <div class="wrap">
+    <span class="olho rev">O diferencial</span>
+    <h2 class="rev">A IA só sobe de degrau depois de provar que pode.</h2>
+    <p class="lead rev">Em vez de "ligar a IA e torcer", cada etapa do processo recebe um degrau de autonomia. Ela começa embaixo e só sobe com números do piloto na mão.</p>
+    <div class="escada">
+      <div class="degrau rev"><span class="g">0</span><h3>Só pessoas</h3><p>A etapa continua inteiramente com a equipe.</p></div>
+      <div class="degrau rev"><span class="g">1</span><h3>Copiloto</h3><p>A IA sugere ou prepara; uma pessoa decide e executa.</p></div>
+      <div class="degrau rev"><span class="g">2</span><h3>Execução conferida</h3><p>A IA executa e uma pessoa confere antes de valer.</p></div>
+      <div class="degrau rev"><span class="g">3</span><h3>Faixa aprovada</h3><p>A IA age sozinha dentro de limites escritos, com revisão periódica.</p></div>
+    </div>
+    <div class="regra rev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><strong>Regra que não se negocia:</strong> em decisões que envolvem saúde, dinheiro de terceiros ou direitos das pessoas, a IA fica no máximo como copiloto. Quem decide é sempre alguém da equipe.</p>
+    </div>
+  </div>
+</section>
+
+<section id="teste">
+  <div class="wrap">
+    <span class="olho rev">Teste rápido</span>
+    <h2 class="rev">Sua empresa está pronta para um piloto?</h2>
+    <p class="lead rev">Seis perguntas sobre o processo que mais incomoda hoje. Responda com sinceridade. Nada é enviado: a conta é feita aqui na página.</p>
+    <div class="teste">
+      <div class="itens" id="itens"></div>
+      <aside class="result" aria-live="polite">
+        <div class="pts"><span id="pts">0</span><small> de 12</small></div>
+        <div class="medidor"><i id="barra"></i></div>
+        <h3 id="r-tit">Responda às seis perguntas</h3>
+        <p id="r-txt">O resultado aparece aqui, com a recomendação do método para o seu momento.</p>
+        <p class="falta" id="falta">Faltam 6 respostas.</p>
+        <p class="falta" id="guarde" hidden>Guarde este resultado e mostre a quem enviou esta página para você.</p>
+        <a class="btn btn-p js-agendar" id="btn-resultado" href="#pacotes" data-sem="Ver qual pacote combina">Conversar sobre o resultado</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <section id="pacotes" style="background:var(--pessego)">
   <div class="wrap">
     <span class="olho rev">Como contratar</span>
-    <h2 class="rev">Três formas de começar.</h2>
-    <p class="lead rev">Sempre um processo por vez. O valor é definido depois da conversa inicial, conforme o tamanho da empresa e do processo escolhido.</p>
+    <h2 class="rev">Comece pequeno. Só avance se os números mandarem.</h2>
+    <p class="lead rev">Sempre um processo por vez. O Diagnóstico pode ser contratado sozinho; a Implantação acompanhada só vem depois de um piloto que deu certo. O valor é definido depois da conversa inicial, conforme o tamanho da empresa e do processo escolhido.</p>
     <div class="pacotes">
       <article class="pac rev">
         <h3>Diagnóstico CLARO</h3>
         <div class="dur">2 a 3 semanas</div>
-        <p class="para">Para quem ainda não sabe por onde começar, ou já gastou com ferramentas sem ver resultado.</p>
+        <p class="para">Para quem ainda não sabe por onde começar ou já gastou com ferramentas sem ver resultado.</p>
         <ul>
           <li>Até 4 entrevistas: dono, liderança, atendimento e execução</li>
           <li>Teste de prontidão</li>
-          <li>Linha de base com os dados que a empresa já tem</li>
+          <li>Ponto de partida medido com os dados que a empresa já tem</li>
           <li>Primeiro olhar sobre o processo</li>
         </ul>
         <div class="entrega"><b>Você sai com</b>Relatório de uma página com a recomendação: implantar, arrumar antes ou não investir agora.</div>
@@ -476,7 +527,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <article class="pac dest rev">
         <span class="tag">Mais completo</span>
         <h3>Redesenho e piloto</h3>
-        <div class="dur">11 a 13 semanas</div>
+        <div class="dur">11 a 13 semanas (processos mensais, como fechamento ou cobrança: 4 a mais)</div>
         <p class="para">As cinco fases aplicadas a um processo, do diagnóstico ao piloto medido.</p>
         <ul>
           <li>Tudo do Diagnóstico (se já contratado, o valor é abatido)</li>
@@ -509,26 +560,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="teste">
-  <div class="wrap">
-    <span class="olho rev">Teste rápido</span>
-    <h2 class="rev">Sua empresa está pronta para um piloto?</h2>
-    <p class="lead rev">Seis perguntas sobre o processo que mais incomoda hoje. Responda com sinceridade; nada é enviado, a conta é feita aqui na página.</p>
-    <div class="teste">
-      <div class="itens" id="itens"></div>
-      <aside class="result" aria-live="polite">
-        <div class="pts"><span id="pts">0</span><small> de 12</small></div>
-        <div class="medidor"><i id="barra"></i></div>
-        <h3 id="r-tit">Responda as seis perguntas</h3>
-        <p id="r-txt">O resultado aparece aqui, com a recomendação do método para o seu momento.</p>
-        <p class="falta" id="falta">Faltam 6 respostas.</p>
-        <a class="btn btn-p" href="#contato">Conversar sobre o resultado</a>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<section id="encaixe" style="padding-top:0">
+<section id="encaixe">
   <div class="wrap">
     <span class="olho rev">Encaixe</span>
     <h2 class="rev">Para quem é, e para quem não é.</h2>
@@ -561,7 +593,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h2 class="rev">Cuidado com dados desde a primeira conversa.</h2>
     <div class="dados">
       <div class="dado rev"><h3>Sigilo antes de tudo</h3><p>Acordo de sigilo assinado antes de recebermos qualquer dado, planilha ou acesso.</p></div>
-      <div class="dado rev"><h3>Só o necessário</h3><p>Usamos apenas os dados que o diagnóstico exige, seguindo a LGPD.</p></div>
+      <div class="dado rev"><h3>Só o necessário</h3><p>Usamos apenas os dados que o diagnóstico exige, seguindo a Lei Geral de Proteção de Dados (LGPD).</p></div>
       <div class="dado rev"><h3>Tudo em seu nome</h3><p>As ferramentas e licenças ficam em nome da sua empresa. Nada fica preso a nós.</p></div>
       <div class="dado rev"><h3>Checklist antes de ligar</h3><p>Nenhuma automação entra no ar sem passar pelo checklist de proteção de dados.</p></div>
     </div>
@@ -575,8 +607,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="faq">
       <details class="rev"><summary>Já usamos o ChatGPT. Isso não basta?</summary><p>É um ótimo começo: a equipe já tem familiaridade. A diferença é que aqui escolhemos um processo, medimos onde ele perde tempo ou cliente e decidimos, com regras escritas, o que a IA faz ali. Ferramenta solta ajuda quem a usa; processo redesenhado ajuda a empresa.</p></details>
       <details class="rev"><summary>E se não der resultado?</summary><p>O piloto é pequeno e tem critério de decisão escrito antes de começar. Se os números não vierem, a decisão é ajustar ou parar, e você sabe exatamente por quê. E se o diagnóstico mostrar que não é hora de investir em IA, o projeto termina ali e você paga só essa etapa.</p></details>
+      <details class="rev"><summary>Em quanto tempo vejo algo concreto?</summary><p>Na primeira semana você já recebe a promessa da sua empresa e o mapa dos pontos em que o cliente se frustra. No fim da segunda, o relatório de uma página com a recomendação. Nada fica para o fim do projeto.</p></details>
       <details class="rev"><summary>Quanto custa?</summary><p>Depende do tamanho da empresa e do processo escolhido, por isso o valor sai depois da conversa inicial. Na proposta, comparamos o investimento com o custo do problema que você mesmo descreveu. Se preferir começar pequeno, o Diagnóstico CLARO já entrega a recomendação e o ponto de partida medido.</p></details>
-      <details class="rev"><summary>Minha equipe não vai aceitar.</summary><p>Por isso a equipe participa do mapeamento desde a primeira semana, e o piloto começa pequeno. Quem executa ajuda a desenhar o processo novo. Quando aparece resistência, investigamos a causa antes de cobrar.</p></details>
+      <details class="rev"><summary>Minha equipe não vai aceitar.</summary><p>Por isso a equipe participa do mapeamento desde a primeira semana, e o piloto começa pequeno. Quem executa ajuda a desenhar o processo novo. Quando aparece resistência, investigamos a causa antes de exigir o uso.</p></details>
       <details class="rev"><summary>Não tenho tempo para isso agora.</summary><p>O projeto pede cerca de 3 horas por semana de quem cuida do processo. Se nem isso couber agora, é melhor esperar: sem alguém responsável, o processo novo não se sustenta, e a gente prefere dizer isso antes.</p></details>
       <details class="rev"><summary>Vocês desenvolvem software sob medida?</summary><p>Não é o foco. Trabalhamos com ferramentas disponíveis no mercado, contratadas em nome da sua empresa. Se o projeto pedir algo sob medida, isso vira uma proposta à parte.</p></details>
       <details class="rev"><summary>Minha empresa não tem dados organizados. Dá para começar?</summary><p>Dá. Se não houver registro, contamos à mão por alguns dias para ter um ponto de partida. E se o teste de prontidão mostrar que é cedo, a recomendação é um plano curto de arrumação antes de qualquer IA.</p></details>
@@ -587,12 +620,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section class="cta" id="contato">
   <div class="wrap">
     <span class="olho rev">Próximo passo</span>
-    <h2 class="rev">Uma conversa de 30 minutos sobre o processo que mais te custa hoje.</h2>
-    <p class="lead rev">Você conta onde a operação trava. A gente diz, com franqueza, se o Método CLARO faz sentido agora, e por qual pacote começar.</p>
+    <h2 class="rev">Conte em 30 minutos onde a sua operação trava.</h2>
+    <p class="lead rev">Você descreve o processo que mais custa à sua empresa hoje. A gente diz, com franqueza, se o Método CLARO faz sentido agora e por qual pacote começar. Se não for a hora, você ouve isso na própria conversa.</p>
     <div class="acoes rev" id="acao-contato">
-      <a class="btn btn-p" id="btn-contato" href="#contato">Agendar conversa</a>
+      <a class="btn btn-p" id="btn-contato" href="#contato">Quero a conversa de 30 minutos</a>
     </div>
-    <p class="obs rev" id="obs-contato">Para agendar, responda à mensagem de quem te enviou esta página.</p>
+    <p class="obs rev" id="obs-contato">Para agendar, responda à mensagem de quem enviou esta página para você.</p>
   </div>
 </section>
 
@@ -609,12 +642,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 (function(){
   /* Contato: preencha com o número do WhatsApp (só dígitos, com DDI e DDD, ex.: 5582999999999). Vazio = sem botão externo. */
   var WHATSAPP = "";
+  window.__msgWhats = function(){
+    var t = 'Olá! Vi a página do Método CLARO';
+    if (window.__pontos != null) t += ', fiz o teste rápido e deu ' + window.__pontos + ' de 12';
+    return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(t + ' e quero agendar a conversa de 30 minutos.');
+  };
+  var agendar = Array.prototype.slice.call(document.querySelectorAll('.js-agendar'));
   if (WHATSAPP) {
-    var b = document.getElementById('btn-contato');
-    b.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Olá! Vi a página do Método CLARO e quero agendar a conversa de 30 minutos.');
-    b.target = '_blank'; b.rel = 'noopener';
-    document.getElementById('obs-contato').textContent = 'A conversa é sem compromisso.';
+    agendar.concat([document.getElementById('btn-contato')]).forEach(function(b){
+      b.href = window.__msgWhats(); b.target = '_blank'; b.rel = 'noopener';
+      b.addEventListener('click', function(){ b.href = window.__msgWhats(); });
+    });
+    document.getElementById('obs-contato').hidden = true;
   } else {
+    agendar.forEach(function(b){ b.textContent = b.dataset.sem; });
     document.getElementById('acao-contato').hidden = true;
   }
 
@@ -683,23 +724,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     document.getElementById('pts').textContent = soma;
     document.getElementById('barra').style.width = (soma / 12 * 100) + '%';
     var falta = perguntas.length - resp;
-    document.getElementById('falta').textContent = falta ? ('Faltam ' + falta + (falta === 1 ? ' resposta.' : ' respostas.')) : 'Resultado indicativo. O teste completo é feito no diagnóstico, com dados.';
+    document.getElementById('falta').textContent = falta ? (falta === 1 ? 'Falta 1 resposta.' : 'Faltam ' + falta + ' respostas.') : 'Resultado indicativo. O teste completo é feito no diagnóstico, com dados.';
     var tit = 'Continue respondendo', txt = 'O resultado aparece aqui, com a recomendação do método para o seu momento.';
     if (!falta) {
       if (notas[2] === 0 || notas[5] === 0) {
         tit = 'Antes da IA: definir quem responde';
-        txt = (notas[2] === 0 ? 'Sem um dono do processo' : 'Sem o apoio de quem decide') + ', o processo novo não se sustenta, seja qual for a soma. O primeiro passo é resolver isso; o Diagnóstico CLARO ajuda a organizar.';
+        txt = (notas[2] === 0 ? 'Sem um dono do processo' : 'Sem o apoio de quem decide') + ', a mudança não se sustenta, seja qual for a soma. O primeiro passo é resolver isso; o Diagnóstico CLARO ajuda a organizar.';
       } else if (soma <= 5) {
         tit = 'Hora de arrumar a casa primeiro';
-        txt = 'A IA ainda acrescentaria pouco. O caminho é um plano curto de arrumação, de 30 a 60 dias, atacando os pontos mais fracos. Depois, vale refazer o teste.';
+        txt = 'A IA ainda acrescentaria pouco. O caminho é um plano curto de arrumação, de 30 a 60 dias, atacando os pontos mais fracos. O Diagnóstico CLARO confirma isso com dados e aponta o que arrumar primeiro.';
       } else if (soma <= 9) {
         tit = 'Dá para começar pequeno';
-        txt = 'Um piloto num processo só é viável, corrigindo os pontos fracos em paralelo. O Redesenho e piloto foi pensado para esse momento.';
+        txt = 'Já dá para fazer um piloto em um único processo, corrigindo os pontos fracos em paralelo. O pacote Redesenho e piloto foi pensado para esse momento.';
       } else {
         tit = 'Pronta para um piloto ambicioso';
         txt = 'A base existe para um piloto com meta ambiciosa, medido contra o ponto de partida desde a primeira semana.';
       }
     }
+    window.__pontos = falta ? null : soma;
+    if (!WHATSAPP) document.getElementById('guarde').hidden = !!falta;
     document.getElementById('r-tit').textContent = tit;
     document.getElementById('r-txt').textContent = txt;
   }
