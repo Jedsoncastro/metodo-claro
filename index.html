@@ -294,6 +294,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <span>Se não for hora, você paga só o diagnóstico</span>
         <span>Para pequenas e médias empresas</span>
         <span>Medição antes e depois</span>
+        <span>Dados protegidos</span>
+        <span>A IA ajuda, não substitui</span>
       </div>
     </div>
     <div class="orbita" aria-hidden="true">
@@ -515,6 +517,32 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
+<section class="escuro" id="prova">
+  <div class="wrap">
+    <span class="olho rev">Nenética Prova Real</span>
+    <h2 class="rev">A IA que a sua empresa já tem, funcionando no seu processo. Com prova.</h2>
+    <p class="lead rev">Não vendemos mais uma ferramenta de IA. Fazemos a IA que a sua empresa já tem funcionar dentro do seu processo, com a equipe treinada, os dados protegidos, e mostramos com número se valeu a pena. O nome vem da prova real da matemática: a conta que confere se o resultado está certo.</p>
+    <div class="dados">
+      <div class="dado rev"><h3>A conta na primeira reunião</h3><p>Fazemos ao vivo, com os números da sua equipe, quanto o problema custa por mês.</p></div>
+      <div class="dado rev"><h3>Nada sai sem conferência</h3><p>No começo, a IA prepara e uma pessoa da sua equipe confere antes de qualquer coisa sair.</p></div>
+      <div class="dado rev"><h3>Provas antes de ganhar autonomia</h3><p>Ela responde a exemplos reais seus, com nota, e passa por pelo menos 50 tentativas de enganá-la. Só sobe de autonomia com a sua assinatura.</p></div>
+      <div class="dado rev"><h3>Número toda semana</h3><p>Um painel com o antes e o agora, a qualidade da IA e o uso pela equipe.</p></div>
+    </div>
+    <div class="dados">
+      <div class="dado rev"><h3>Dados protegidos e decisão com vocês</h3><p>A IA não decide preço, desconto ou pagamento: quem decide é a regra da sua empresa ou uma pessoa. CPF, telefone, e-mail e dados de saúde são escondidos antes de chegar à IA, e um botão desliga tudo em segundos.</p></div>
+      <div class="dado rev"><h3>A IA ajuda, não substitui</h3><p>A ideia é tirar da equipe a parte repetitiva. Entre os pequenos negócios que já usam IA, 90% não mudaram o número de funcionários (Sebrae, agosto de 2026).</p></div>
+      <div class="dado rev"><h3>Tudo no nome da sua empresa</h3><p>Contas, chaves e automações ficam com você, com manual para a equipe. Se quiser, um suporte mensal refaz as provas.</p></div>
+      <div class="dado rev"><h3>Sem promessa de resultado</h3><p>Prometemos método, medição honesta e decisão com números. Se os números não vierem, você sabe por quê.</p></div>
+    </div>
+    <!-- Garantia de entrega: escondida até a decisão D2 ser confirmada pelo Jedson. Para mostrar, tire este comentário.
+    <div class="regra rev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+      <p><strong>Garantia de entrega:</strong> se os acessos combinados forem liberados até o fim da semana 2, o piloto estará rodando, com a sua equipe conferindo, até o fim da semana 4. Se não estiver por motivo nosso, seguimos trabalhando até ele rodar, sem cobrar nada a mais por esse tempo. É garantia de entrega, não de resultado.</p>
+    </div>
+    -->
+  </div>
+</section>
+
 <section id="pacotes" style="background:var(--pessego)">
   <div class="wrap">
     <span class="olho rev">Como contratar</span>
@@ -536,7 +564,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <article class="pac dest rev">
         <span class="tag">Mais completo</span>
         <h3>Redesenho e piloto</h3>
-        <div class="dur">11 a 13 semanas (processos mensais, como fechamento ou cobrança: 4 a mais)</div>
+        <div class="dur">12 semanas (processos mensais, como fechamento ou cobrança: 4 a mais)</div>
         <p class="para">As cinco fases aplicadas a um processo, do diagnóstico ao piloto medido.</p>
         <ul>
           <li>Tudo do Diagnóstico (se já contratado, o valor é abatido)</li>
@@ -596,6 +624,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
+<!-- Quem conduz: escondida até a decisão D6 (texto e foto do Jedson). Para mostrar, tire este comentário.
+<section id="quem" style="background:var(--pessego)">
+  <div class="wrap">
+    <span class="olho rev">Quem conduz</span>
+    <h2 class="rev">Quem vai estar com você no projeto.</h2>
+    ( Decisão D6: texto e foto a preencher pelo Jedson antes de publicar. )
+    <p class="lead rev">[Preencher: nome, formação, experiência com processos e com IA, e por que conduz este trabalho. Só fatos que possam ser conferidos.]</p>
+  </div>
+</section>
+-->
+
 <section class="escuro" id="dados">
   <div class="wrap">
     <span class="olho rev">Seus dados</span>
@@ -650,7 +689,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <script>
 (function(){
   /* Contato: preencha com o número do WhatsApp (só dígitos, com DDI e DDD, ex.: 5582999999999). Vazio = sem botão externo. */
-  var WHATSAPP = "";
+  var WHATSAPP = ""; // Decisão D6: número do WhatsApp a preencher pelo Jedson (só dígitos, com 55 e DDD)
   window.__msgWhats = function(){
     var t = 'Olá! Vi a página do Método CLARO';
     if (window.__pontos != null) t += ', fiz o teste rápido e deu ' + window.__pontos + ' de 12';
