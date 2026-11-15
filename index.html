@@ -68,15 +68,17 @@ h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
 .orbita .anel{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
 .orbita .anel.a2{inset:14%;border-color:rgba(242,106,72,.28)}
 .orbita .anel.a3{inset:28%;border-color:rgba(255,255,255,.08)}
-.orbita .logo{position:absolute;inset:34%;display:grid;place-items:center;animation:flutua 6s ease-in-out infinite}
-.orbita .logo img{filter:drop-shadow(0 18px 30px rgba(242,106,72,.45))}
+/* Regra Nenética: o centro do N coincide com o centro do alvo. icone-centro.png já vem recentrado pelo
+   corpo do N, e a animação pulsa no lugar, sem deslocar. */
+.orbita .logo{position:absolute;inset:34%;display:grid;place-items:center;animation:pulsa 6s ease-in-out infinite;transform-origin:50% 50%}
+.orbita .logo img{width:100%;height:auto;filter:drop-shadow(0 0 28px rgba(242,106,72,.45))}
 .orbita .letra{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font:700 19px/1 Poppins,sans-serif;color:#fff;background:rgba(39,45,51,.9);border:1px solid rgba(253,152,110,.5);box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
 .giro{position:absolute;inset:0;animation:gira 22s linear infinite}
 .giro .letra{animation:contra 22s linear infinite}
 .orbita .anel.a2{border-style:dashed;animation:gira 40s linear infinite reverse}
 .orbita .eletron{position:absolute;inset:14%;animation:gira 9s linear infinite}
 .orbita .eletron::before{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--coral-2);box-shadow:0 0 14px 3px rgba(253,152,110,.7)}
-@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes gira{to{transform:rotate(360deg)}}
 @keyframes contra{to{transform:rotate(-360deg)}}
 
@@ -305,7 +307,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <span class="letra" style="left:79.4%;top:90.5%">R</span>
         <span class="letra" style="left:97.6%;top:34.5%">O</span>
       </div>
-      <div class="logo"><img src="icone.png" alt="" width="192" height="174"></div>
+      <div class="logo"><img src="icone-centro.png" alt="" width="400" height="387"></div>
     </div>
   </div>
 </section>
