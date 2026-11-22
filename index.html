@@ -65,20 +65,14 @@ h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;max-width:22ch}
 .selos span{display:flex;align-items:center;gap:8px}
 .selos span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
 .orbita{position:relative;aspect-ratio:1;max-width:400px;justify-self:center;width:100%}
-.orbita .anel{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
-.orbita .anel.a2{inset:14%;border-color:rgba(242,106,72,.28)}
-.orbita .anel.a3{inset:28%;border-color:rgba(255,255,255,.08)}
-/* Regra Nenética: o centro do N coincide com o centro do alvo. icone-centro.png já vem recentrado pelo
-   corpo do N, e a animação pulsa no lugar, sem deslocar. */
-.orbita .logo{position:absolute;inset:34%;display:grid;place-items:center;animation:pulsa 6s ease-in-out infinite;transform-origin:50% 50%}
-.orbita .logo img{width:100%;height:auto;filter:drop-shadow(0 0 28px rgba(242,106,72,.45))}
+/* Regra Nenética: o centro do N coincide com o centro do alvo. A logo animada usa a geometria de
+   icone-centro.png (já recentrado pelo corpo do N); só a bolinha se move, o N fica parado no centro.
+   Logo animada oficial (22/11/2026): a bolinha da própria logo percorre a órbita, sem anéis externos. */
+.orbita .logo{position:absolute;inset:19%;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,rgba(242,106,72,.22),transparent 66%)}
+.orbita .logo svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 28px rgba(242,106,72,.35))}
 .orbita .letra{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;font:700 19px/1 Poppins,sans-serif;color:#fff;background:rgba(39,45,51,.9);border:1px solid rgba(253,152,110,.5);box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
 .giro{position:absolute;inset:0;animation:gira 22s linear infinite}
 .giro .letra{animation:contra 22s linear infinite}
-.orbita .anel.a2{border-style:dashed;animation:gira 40s linear infinite reverse}
-.orbita .eletron{position:absolute;inset:14%;animation:gira 9s linear infinite}
-.orbita .eletron::before{content:"";position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--coral-2);box-shadow:0 0 14px 3px rgba(253,152,110,.7)}
-@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes gira{to{transform:rotate(360deg)}}
 @keyframes contra{to{transform:rotate(-360deg)}}
 
@@ -299,7 +293,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </div>
     <div class="orbita" aria-hidden="true">
-      <div class="anel"></div><div class="anel a2"></div><div class="anel a3"></div><div class="eletron"></div>
       <div class="giro">
         <span class="letra" style="left:50%;top:0%">C</span>
         <span class="letra" style="left:2.4%;top:34.5%">L</span>
@@ -307,7 +300,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <span class="letra" style="left:79.4%;top:90.5%">R</span>
         <span class="letra" style="left:97.6%;top:34.5%">O</span>
       </div>
-      <div class="logo"><img src="icone-centro.png" alt="" width="400" height="387"></div>
+      <div class="logo"><svg class="logo-nenetica" viewBox="0 0 400 387" aria-hidden="true">
+        <defs>
+          <radialGradient id="nen-bolinha" cx="38%" cy="35%" r="70%"><stop offset="0%" stop-color="#ff8a66"/><stop offset="60%" stop-color="#fb6448"/><stop offset="100%" stop-color="#ef5238"/></radialGradient>
+          <radialGradient id="nen-brilho"><stop offset="0%" stop-color="#fd986e" stop-opacity=".55"/><stop offset="100%" stop-color="#fd986e" stop-opacity="0"/></radialGradient>
+          <clipPath id="nen-metade-de-tras"><polygon points="-688,677 1073,-271 599,-1151 -1162,-203"/></clipPath>
+          <mask id="nen-atras-do-n" maskUnits="userSpaceOnUse" x="-60" y="-60" width="520" height="507"><rect x="-60" y="-60" width="520" height="507" fill="#fff"/><g clip-path="url(#nen-metade-de-tras)"><image href="icone-silhueta.png" width="400" height="387"/></g></mask>
+        </defs>
+        <image href="icone-centro-sem-bolinha.png" width="400" height="387"/>
+        <circle cx="394.5" cy="227" r="7.4" fill="#d6cbc6"/><circle cx="324.5" cy="389" r="4.5" fill="#fcaf9e"/>
+        <g mask="url(#nen-atras-do-n)">
+          <circle r="38" fill="url(#nen-brilho)"><animateMotion dur="9s" repeatCount="indefinite" path="M 340.1 74.8 A 213 96.7 -28.3 1 1 45.4 331.6 A 213 96.7 -28.3 1 1 340.1 74.8 Z"/></circle>
+          <circle r="21" fill="url(#nen-bolinha)"><animateMotion dur="9s" repeatCount="indefinite" path="M 340.1 74.8 A 213 96.7 -28.3 1 1 45.4 331.6 A 213 96.7 -28.3 1 1 340.1 74.8 Z"/></circle>
+        </g>
+      </svg></div>
     </div>
   </div>
 </section>
@@ -833,6 +839,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     document.getElementById('r-txt').textContent = txt;
   }
 })();
+</script>
+<script>
+  // Logo animada: quem pede menos movimento vê a logo parada (as letras CLARO seguem girando devagar).
+  (function(){var m=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)');
+    function aplicar(){document.querySelectorAll('svg.logo-nenetica').forEach(function(s){if(m&&m.matches){s.pauseAnimations();s.setCurrentTime(0);}else{s.unpauseAnimations();}});}
+    aplicar(); if(m&&m.addEventListener)m.addEventListener('change',aplicar);})();
 </script>
 </body>
 </html>
